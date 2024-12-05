@@ -28,13 +28,17 @@ lock accounts with `sudo passwd -l [username]`
  Basically, you add an apache group and an apache user, apache user has no login. `sudo useradd -r -s /sbin/nologin -g apache_group apache_user` . Then you change the ownership of the /www/ folder to the apache user and apache group
   `sudo chown -R apache_user:apache_group /path/to/your/document/root`
 
-11. `sudo yum update ca-certificates` to update certs
+ add `User apache_user`
+ add `Group apache_group`
+ to /etc/httpd/conf/httpd.conf
 
-12. finding services running: `systemctl list-unit-files --type=service | grep enabled`
+12. `sudo yum update ca-certificates` to update certs
 
-13. disabling services: `systemctl disable service_name` or `yum remove packagename`
+13. finding services running: `systemctl list-unit-files --type=service | grep enabled`
 
-14. changing /etc/httpd/conf/httpd.conf to harden service: (remember in vim use `/.` to find things fast)
+14. disabling services: `systemctl disable service_name` or `yum remove packagename`
+
+15. changing /etc/httpd/conf/httpd.conf to harden service: (remember in vim use `/.` to find things fast)
     `ServerSignature Off`
     `TraceEnable Off`
     `ServerTokens Prod`
